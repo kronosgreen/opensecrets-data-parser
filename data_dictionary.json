@@ -1,0 +1,393 @@
+{
+    "Lobby": {
+        "lob_lobbying": {
+            "record_count": 1368897,
+            "fields": [
+                {
+                    "field": "Uniqid",
+                    "definition": "Corresponds to a particular report from SOPR",
+                    "type": "varchar",
+                    "length": 36,
+                    "source": "SOPR"
+                },
+                {
+                    "field": "Registrant_raw",
+                    "description": "Raw registrant",
+                    "type": "varchar",
+                    "length": 110,
+                    "source": "SOPR"
+                },
+                {
+                    "field": "Registrant",
+                    "definition": "Standardized registrant",
+                    "type": "varchar",
+                    "length": 50,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Isfirm",
+                    "definition": "Notes whether or not the firm is a lobbying firm.",
+                    "type": "char",
+                    "length": 1,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Client_raw",
+                    "definition": "Raw client",
+                    "type": "varchar",
+                    "length": 110,
+                    "source": "SOPR"
+                },
+                {
+                    "field": "Client",
+                    "definition": "Standardized client",
+                    "type": "varchar",
+                    "length": 50,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Ultorg",
+                    "definition": "Parent company to the client",
+                    "type": "varchar",
+                    "length": 50,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Amount",
+                    "definition": "Lobbying income/expenses",
+                    "type": "Float",
+                    "length": "",
+                    "source": "SOPR"
+                },
+                {
+                    "field": "Catcode",
+                    "definition": "The standard five character code identifying the donor’s industry or ideology.",
+                    "type": "char",
+                    "length": 5,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Source",
+                    "definition": "Souce of catcode",
+                    "type": "char",
+                    "length": 5,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Self",
+                    "definition": "Indicate type of filing:\nn means a non self filer parent.\nm means a non self filer subsidiary for a non self filer parent.\nx means self filer subsidiary for a non self filer parent\np means a self filer parent\ni means a non self filer for a self filer parent that has same catorder as the parent\ns means a self filer subsidiary for a self filer parent\ne means a non self filer subsidiary for a self file subsidiary. Don't count this unless the e is bigger than the s\nc means a non self filer subsidiary for a self filer parent with same catorder. Count it in both total and industry when IncludeNSFS is null. Don't count it in total or industry when IncludeNSFS=y\nb means a non self filer subsidiary for a self filer parent that has different catorder. Count it in both total and industry when IncludeNSFS is null. Exclude from total and include in indus but mines it from the total of the parent when IncludeNSFS=y",
+                    "type": "char",
+                    "length": 1,
+                    "source": "CRP"
+                },
+                {
+                    "field": "IncludeNSFS",
+                    "definition": "To indicate if the filer included its non self filers affiliates activities",
+                    "type": "char",
+                    "length": 1,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Use",
+                    "definition": "To indicate if this report should be used or ignored. The general method is to use the latest report.",
+                    "type": "char",
+                    "length": 1,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Ind",
+                    "definition": "To indicate if the amount on this report should be included to calculate industry totals.",
+                    "type": "char",
+                    "length": 1,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Year",
+                    "definition": "The year.",
+                    "type": "char",
+                    "length": 4,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Type",
+                    "definition": "A CRP short version of reports’ types. Look at the reference table “ReportTypes” for possible values",
+                    "type": "char",
+                    "length": 4,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Typelong",
+                    "definition": "The long version of reports’ types. Look at the reference table 'ReportTypes' for possible values",
+                    "type": "varchar",
+                    "length": 80,
+                    "source": "SOPR"
+                },
+                {
+                    "field": "Affiliate",
+                    "definition": "To indicate if the major political contributor is an affiliate or not",
+                    "type": "char",
+                    "length": 1,
+                    "source": "CRP"
+                }
+            ]
+        },
+        "lob_lobbyist": {
+            "record_count": 3080187,
+            "fields": [
+                {
+                    "field": "UniqID",
+                    "definition": "Corresponds to a particular report from SOPR",
+                    "type": "varchar",
+                    "length": 36,
+                    "source": "SOPR"
+                },
+                {
+                    "field": "Lobbyist_raw",
+                    "definition": "Raw value of lobbyist's name.",
+                    "type": "varchar",
+                    "length": 50,
+                    "source": "SOPR"
+                },
+                {
+                    "field": "Lobbyist",
+                    "definition": "Standardized lobbyist.",
+                    "type": "varchar",
+                    "length": 50,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Lobbyist_id",
+                    "definition": "An ID assigned to each unique lobbyist.",
+                    "type": "varchar",
+                    "length": 12,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Year",
+                    "definition": "The year.",
+                    "type": "char",
+                    "length": 4,
+                    "source": "SOPR"
+                },
+                {
+                    "field": "OfficialPosition",
+                    "definition": "Any previous government official position the individual lobbyist had",
+                    "type": "varchar",
+                    "length": 100,
+                    "source": "SOPR"
+                },
+                {
+                    "field": "CID",
+                    "definition": "An ID assigned to members of congress and federal candidates. It will have a value if the lobbyist is a former member of congress",
+                    "type": "varchar",
+                    "length": 15,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Formercongmem",
+                    "definition": "Notes whether the lobbyist is a former member.",
+                    "type": "char",
+                    "length": 1,
+                    "source": "CRP"
+                }
+            ]
+        },
+        "lob_indus": {
+            "record_count": 281465,
+            "fields": [
+                {
+                    "field": "Client",
+                    "definition": "Standardized client.",
+                    "type": "varchar",
+                    "length": 50,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Sub",
+                    "definition": "Standardized subsidiary.",
+                    "type": "varchar",
+                    "length": 50,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Total",
+                    "definition": "Total amount by catcode",
+                    "type": "float",
+                    "source": "CRP"
+                },
+                {
+                    "field": "Year",
+                    "definition": "The year.",
+                    "type": "char",
+                    "length": 4,
+                    "source": "SOPR"
+                },
+                {
+                    "field": "Catcode",
+                    "definition": "The standard five character code identifying the donor's industry or ideology.",
+                    "type": "char",
+                    "length": 5,
+                    "source": "CRP"
+                }
+            ]
+        },
+        "lob_agency": {
+            "record_count": 3630742,
+            "fields": [
+                {
+                    "field": "Uniqid",
+                    "definition": "Corresponds to a particular report from SOPR",
+                    "type": "varchar",
+                    "length": 36,
+                    "source": "SOPR"
+                },
+                {
+                    "field": "AgencyID",
+                    "definition": "An agency unique identifier",
+                    "type": "char",
+                    "length": 3,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Agency",
+                    "definition": "The government agency lobbied",
+                    "type": "varchar",
+                    "length": 80,
+                    "source": "SOPR"
+                }
+            ]
+        },
+        "lob_issue": {
+            "record_count": 2647672,
+            "fields": [
+                {
+                    "field": "SI_ID",
+                    "definition": "Unique identifier for this table",
+                    "type": "int"
+                },
+                {
+                    "field": "Uniqid",
+                    "definition": "Corresponds to a particular report from SOPR",
+                    "type": "varchar",
+                    "length": 36,
+                    "source": "SOPR"
+                },
+                {
+                    "field": "IssueID",
+                    "definition": "A three-letter code corresponding to the general issue area.",
+                    "type": "char",
+                    "length": 3,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Issue",
+                    "definition": "The long version of the three letter general issue.",
+                    "type": "varchar",
+                    "length": 50,
+                    "source": "SOPR"
+                },
+                {
+                    "field": "SpecificIssue",
+                    "definition": "The specific issue.",
+                    "type": "varchar",
+                    "length": "Max",
+                    "source": "SOPR"
+                },
+                {
+                    "field": "Year",
+                    "definition": "The Year.",
+                    "type": "char",
+                    "length": 4,
+                    "source": "SOPR"
+                }
+            ]
+        },
+        "lob_issue_NoSpecficIssue": {
+            "record_count": 2647672,
+            "fields": [
+
+                {
+                    "field": "SI_ID",
+                    "definition": "Unique identifier for this table",
+                    "type": "int"
+                },
+                {
+                    "field": "Uniqid",
+                    "definition": "Corresponds to a particular report from SOPR",
+                    "type": "varchar",
+                    "length": 36,
+                    "source": "SOPR"
+                },
+                {
+                    "field": "IssueID",
+                    "definition": "A three-letter code corresponding to the general issue area.",
+                    "type": "char",
+                    "length": 3,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Issue",
+                    "definition": "The long version of the three letter general issue.",
+                    "type": "varchar",
+                    "length": 50,
+                    "source": "SOPR"
+                },
+                {
+                    "field": "Year",
+                    "definition": "The Year.",
+                    "type": "char",
+                    "length": 4,
+                    "source": "SOPR"
+                }
+            ]
+        },
+        "lob_bills": {
+            "record_count": 6857772,
+            "fields": [
+                {
+                    "field": "B_ID",
+                    "definition": "Unique identifier for bill",
+                    "type": "int",
+                    "source": "CRP"
+                },
+                {
+                    "field": "SI_ID",
+                    "definition": "It is the specific issue unique identifier. It is a foreign key on this table",
+                    "type": "int",
+                    "source": "CRP"
+                },
+                {
+                    "field": "CongNo",
+                    "definition": "Congress number",
+                    "type": "char",
+                    "length": 3,
+                    "source": "CRP"
+                },
+                {
+                    "field": "Bill_Name",
+                    "definition": "The bill name",
+                    "type": "char",
+                    "length": 15,
+                    "source": "CRP"
+                }
+            ]
+        },
+        "lob_rpt": {
+            "record_count": 94,
+            "fields": [
+                {
+                    "field": "Type Long",
+                    "type": "varchar",
+                    "length": 50,
+                    "source": "SOPR"
+                },
+                {
+                    "field": "Type code",
+                    "type": "varchar",
+                    "length": 3,
+                    "source": "CRP"
+                }
+            ]
+        }
+    }
+}
