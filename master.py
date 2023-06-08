@@ -1,6 +1,6 @@
 import json
 from os.path import join
-from helpers.functions import read_table
+import pandas as pd
 
 # Read in files 
 with open('data_dictionary.json') as f:
@@ -8,20 +8,45 @@ with open('data_dictionary.json') as f:
 
 categories = list(data_dictionary.keys())
 
-for category in categories:
-    category_dict = data_dictionary[category]
-    tables = list(category_dict.keys())
+
+def get_col_info(fields):
+    types_parse = {
+        'varchar': 'string',
+        'text': 'string',
+        'char': 'string', 
+        'float': 'Float64',
+        'number': 'Float64',
+        'int': 'Int32',
+        'integer': 'Int32',
+        'datetime': 'string'
+    }
+    dtypes = { field['field'] : types_parse[field['type'].lower()] for field in fields}
+    col_names = [field['field'] for field in fields]
+
+    return (col_names, dtypes)
+
+
+for category, cat_dict in data_dictionary.items():
+    if category == "Lobby":
+        continue
+    print("Reading category %s..." % category)
+    tables = list(cat_dict['tables'].keys())
     for table in tables:
-        print("Reading in table %s..." % table)
+        print("Reading table %s..." % table)
         path = join('data/', category, '%s.txt' % table)
-        params = category_dict[table]
+        params = cat_dict['tables'][table]
+        # df = get_df_from_txt(path, params)
         total_records = params['record_count']
-        fields = params['fields']
+        col_names, dtypes = get_col_info(params['fields'])
+        parse_dates = [col for col, dtype in dtypes.items() if dtype == 'datetime64']
+        df = pd.read_csv(path,
+                header=None,
+                dtype=dtypes,
+                parse_dates=parse_dates,
+                names=col_names,
+                quotechar='|',
+                encoding_errors='ignore')
         
-        df = read_table(path, fields)
-        
-        # Check if parsed dataframe matches record count
-        if df.shape[0] != total_records:
-            print("DataFrame (%d rows) did not match record count (%d)" % (df.shape[0], total_records))
-        
-        print(df)
+        assert df.shape[0] == total_records
+
+        print("Finished reading %d rows" % df.shape[0])
