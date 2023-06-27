@@ -1,9 +1,9 @@
 {
     "Lobby": {
-        "last_updated": "6/9/21",
+        "last_updated": "5/12/23",
         "tables": {
             "lob_lobbying": {
-                "record_count": 1368897,
+                "record_count": 1544012,
                 "fields": [
                     {
                         "field": "Uniqid",
@@ -134,7 +134,7 @@
                 ]
             },
             "lob_lobbyist": {
-                "record_count": 3080187,
+                "record_count": 3475162,
                 "fields": [
                     {
                         "field": "UniqID",
@@ -195,7 +195,7 @@
                 ]
             },
             "lob_indus": {
-                "record_count": 281465,
+                "record_count": 309730,
                 "fields": [
                     {
                         "field": "Client",
@@ -234,7 +234,7 @@
                 ]
             },
             "lob_agency": {
-                "record_count": 3630742,
+                "record_count": 4097763,
                 "fields": [
                     {
                         "field": "Uniqid",
@@ -260,7 +260,7 @@
                 ]
             },
             "lob_issue": {
-                "record_count": 2647672,
+                "record_count": 3009864,
                 "fields": [
                     {
                         "field": "SI_ID",
@@ -305,9 +305,8 @@
                 ]
             },
             "lob_issue_NoSpecficIssue": {
-                "record_count": 2647672,
+                "record_count": 3009864,
                 "fields": [
-
                     {
                         "field": "SI_ID",
                         "definition": "Unique identifier for this table",
@@ -344,7 +343,7 @@
                 ]
             },
             "lob_bills": {
-                "record_count": 6857772,
+                "record_count": 7262028,
                 "fields": [
                     {
                         "field": "B_ID",
@@ -375,7 +374,7 @@
                 ]
             },
             "lob_rpt": {
-                "record_count": 94,
+                "record_count": 95,
                 "fields": [
                     {
                         "field": "Type Long",
@@ -470,7 +469,7 @@
                         "source": "CRP"
                     },
                     {
-                        "field": "Party", 
+                        "field": "Party",
                         "description": "(D,R,3,I,L) Will be null or empty if committee is not a party, joint fundraising, leadership or candidate committee.",
                         "type": "text",
                         "length": 1,
@@ -532,7 +531,7 @@
                         "length": 2,
                         "source": "IRS"
                     }
-                ] 
+                ]
             },
             "expends527": {
                 "record_count": 1478021,
@@ -670,7 +669,7 @@
                         "description": "Occupation of recipient",
                         "source": "IRS"
                     }
-                ] 
+                ]
             },
             "rcpts527": {
                 "record_count": 2071429,
@@ -850,7 +849,1664 @@
                         "length": 5,
                         "source": "CRP"
                     }
-                ] 
+                ]
+            }
+        }
+    },
+    "PFD": {
+        "last_updated": "6/11/21",
+        "tables": {
+            "PFDagree": {
+                "record_count": 4832,
+                "fields": [
+                    {
+                        "field": "ID",
+                        "description": "Unique id within a year.",
+                        "type": "Text",
+                        "length": "15",
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Chamber",
+                        "description": "Rerfers to chamber the report was filed with. \"H\" for House, \"S\" for Senate, \"E\" for executive branch",
+                        "type": "Text",
+                        "length": "1",
+                        "source": "Report"
+                    },
+                    {
+                        "field": "CID",
+                        "description": "Unique id for each filer.",
+                        "type": "Text",
+                        "length": "9",
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "CalendarYear",
+                        "description": "Calendar year that is covered by report and that this record applies to.",
+                        "type": "Text",
+                        "length": "2",
+                        "source": "Report"
+                    },
+                    {
+                        "field": "ReportType",
+                        "description": "Y=Annual filing, A=Amendment, T=Termination",
+                        "type": "text",
+                        "length": "1",
+                        "source": "Report"
+                    },
+                    {
+                        "field": "AgreementDate1",
+                        "description": "Date when agreement was made or began.",
+                        "type": "Date",
+                        "length": "",
+                        "source": "Report"
+                    },
+                    {
+                        "field": "AgreementDate1Text",
+                        "description": "Date when agreement was made or began.",
+                        "type": "Text",
+                        "length": "50",
+                        "source": "Report"
+                    },
+                    {
+                        "field": "AgreementDate2",
+                        "description": "Date when agreement ended. Agreement was not concluded if null or empty.",
+                        "type": "Date",
+                        "length": "",
+                        "source": "Report"
+                    },
+                    {
+                        "field": "AgreementDate2Text",
+                        "description": "Date when agreement ended. Agreement was not concluded if null or empty.",
+                        "type": "Text",
+                        "length": "50",
+                        "source": "Report"
+                    },
+                    {
+                        "field": "AgreementParty1",
+                        "description": "First party to the agreement.",
+                        "type": "Text",
+                        "length": "100",
+                        "source": "Report"
+                    },
+                    {
+                        "field": "Orgname",
+                        "description": "Standardized version of first party to the agreement. Based on AgreementParty1.",
+                        "type": "Text",
+                        "length": "50",
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Ultorg",
+                        "description": "Standardized parent organization of first party to the agreement. If none, this field will be null or empty.",
+                        "type": "Text",
+                        "length": "50",
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Realcode",
+                        "description": "Industry code for AgreementParty1",
+                        "type": "Text",
+                        "length": "5",
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Source",
+                        "description": "Source used to determine Realcode",
+                        "type": "Text",
+                        "length": "5",
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "AgreementParty1Loc",
+                        "description": "Location information for AgreementParty1. City and state for example.",
+                        "type": "Text",
+                        "length": "50",
+                        "source": "Report"
+                    },
+                    {
+                        "field": "AgreementParty2",
+                        "description": "Second party to the agreement. Based on AgreementParty2. Understood to be the filer if null or empty.",
+                        "type": "Text",
+                        "length": "100",
+                        "source": "Report"
+                    },
+                    {
+                        "field": "Orgname2",
+                        "description": "Standardized version of second party to the agreement. Based on AgreementParty2.",
+                        "type": "Text",
+                        "length": "50",
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Ultorg2",
+                        "description": "Standardized parent organization of second party to the agreement. If none, this field will be null or empty.",
+                        "type": "Text",
+                        "length": "50",
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Realcode2",
+                        "description": "Industry code for AgreementParty2",
+                        "type": "Text",
+                        "length": "5",
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Source2",
+                        "description": "Source used to determine Realcode2",
+                        "type": "Text",
+                        "length": "5",
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "AgreementTerms",
+                        "description": "Description of purpose and terms of the agreeement",
+                        "type": "Memo",
+                        "length": "",
+                        "source": "Report"
+                    },
+                    {
+                        "field": "Dupe",
+                        "description": "\"D\" if record is duplicated in same or subsiquent reports and should not be calculated or displayed.",
+                        "type": "Text",
+                        "length": "1",
+                        "source": "CRP"
+                    }
+                ]
+            },
+            "PFDasset": {
+                "record_count": 592350,
+                "fields": [
+                    {
+                        "field": "ID",
+                        "description": "In combination with CalendarYear, the primary key. Starting with a letter, followed by two digits indicating the year, and then a 7 digit ID number. With the addition of the year in the ID, these should be unique by themselves but as of now cannot be assumed to be so.",
+                        "type": "Text",
+                        "length": 10,
+                        "source": "CRP",
+                        "reference": ""
+                    },
+                    {
+                        "field": "Chamber",
+                        "description": "Rerfers to chamber the report was filed with. \"H\" for House, \"S\" for Senate, \"E\" for executive branch",
+                        "type": "Text",
+                        "length": 2,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "CID",
+                        "description": "Unique CRP identifier for each candidate or executive branch member",
+                        "type": "Text",
+                        "length": 10,
+                        "source": "CRP",
+                        "reference": ""
+                    },
+                    {
+                        "field": "CalendarYear",
+                        "description": "Year covered by report",
+                        "type": "Text",
+                        "length": 2,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "ReportType",
+                        "description": "Indicates if the report is an Annual Filing (Y), an Amendment (A), or a Termination (T)",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "SenAB",
+                        "description": "Senate forms separate publicly traded assets (A) and non-publicly traded assets (B)",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetSpouseJointDep",
+                        "description": "Indicates whether an asset belongs to the filers spouse (S), a dependent child (D), or is held jointly (J). If null we assume it is held by the filer.",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetSource",
+                        "description": "Name of asset or account as reported by filer. If assets are held within an account, the name of the account appears here. If not, the asset itself will appear here.",
+                        "type": "Text",
+                        "length": 100,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "Orgname",
+                        "description": "Standardized version of AssetSource",
+                        "type": "Text",
+                        "length": 40,
+                        "source": "CRP",
+                        "reference": ""
+                    },
+                    {
+                        "field": "Ultorg",
+                        "description": "Standardized parent organization of AssetSource. If none, this field will be null or empty.",
+                        "type": "Text",
+                        "length": 40,
+                        "source": "CRP",
+                        "reference": ""
+                    },
+                    {
+                        "field": "RealCode",
+                        "description": "Industry code for AssetSource",
+                        "type": "Text",
+                        "length": 5,
+                        "source": "CRP",
+                        "reference": ""
+                    },
+                    {
+                        "field": "Source",
+                        "description": "Source used to determine Realcode",
+                        "type": "Text",
+                        "length": 5,
+                        "source": "CRP",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetDescrip",
+                        "description": "Name of asset as reported by filer. Actual assets, when they are held in an account.",
+                        "type": "Text",
+                        "length": 100,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "Orgname2",
+                        "description": "Standardized version of AssetDescrip",
+                        "type": "Text",
+                        "length": 40,
+                        "source": "CRP",
+                        "reference": ""
+                    },
+                    {
+                        "field": "Ultorg2",
+                        "description": "Standardized parent organization of AssetDescrip. If none, this field will be null or empty.",
+                        "type": "Text",
+                        "length": 40,
+                        "source": "CRP",
+                        "reference": ""
+                    },
+                    {
+                        "field": "RealCode2",
+                        "description": "Industry code for AssetDescrip",
+                        "type": "Text",
+                        "length": 5,
+                        "source": "CRP",
+                        "reference": ""
+                    },
+                    {
+                        "field": "Source2",
+                        "description": "Source used to determine Realcode2",
+                        "type": "Text",
+                        "length": 5,
+                        "source": "CRP",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetSourceLocation",
+                        "description": "Combines City, State info into one field",
+                        "type": "Text",
+                        "length": 50,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetValue",
+                        "description": "Value range of asset as reported by filer",
+                        "type": "Text",
+                        "length": 2,
+                        "source": "Report",
+                        "reference": "RangesAssets.Code"
+                    },
+                    {
+                        "field": "AssetExactValue",
+                        "description": "Exact value of asset when provided.",
+                        "type": "float",
+                        "length":"",                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetDividends",
+                        "description": "Asset produced Dividend income",
+                        "type": "Text",
+                        "length": 2,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetRent",
+                        "description": "Asset produced Rental income",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetInterest",
+                        "description": "Asset produced Interest income",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetCapitalGains",
+                        "description": "Asset produced Capital Gains income",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetExemptedFund",
+                        "description": "Income from an exempted fund. (\"mutual fund, common trust fund of a bank, pension or deferred compensation plan, or any other investment fund, which is: 1)widely held, 2)publicly traded, or widely diversified,  and 3)held under circumstances where you neither exercise control over nor have the ability to exercise control over the financial interests held by the fund.\") Applies to Senate & Exec forms only",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetExemptedTrust",
+                        "description": "Income from an exempted trust",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetQualifiedBlindTrust",
+                        "description": "Income from a qualified blind trust",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetTypeCRP",
+                        "description": "Type of investment. Stock, real estate, etc. Used to determine which to count in industry totals.",
+                        "type": "Text",
+                        "length": 2,
+                        "source": "CRP",
+                        "reference": "AssetTypeCodes.AssetTypeCode"
+                    },
+                    {
+                        "field": "OtherTypeIncome",
+                        "description": "Other than Div, Rent, Interest, CG",
+                        "type": "Text",
+                        "length": 100,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetIncomeAmtRange",
+                        "description": "Indicates how much income was produced by asset. ",
+                        "type": "Text",
+                        "length": 4,
+                        "source": "Report",
+                        "reference": "RangesAssetIncome.AssetIncomeAmtRange (Also see DoleAssetFactors)"
+                    },
+                    {
+                        "field": "AssetIncomeAmountText",
+                        "description": "Description of income amount or raw version of precise amount in AssetIncomeAmt",
+                        "type": "Text",
+                        "length": 50,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetIncomeAmt",
+                        "description": "Precise numbers when available",
+                        "type": "Currency",
+                        "length": null,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetPurchased",
+                        "description": "Asset was purchased during reporting period",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetSold",
+                        "description": "Asset was sold during reporting period",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetExchanged",
+                        "description": "Asset was exchanged during reporting period",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetDate",
+                        "description": "",
+                        "type": "Date",
+                        "length": "mm/dd/yyyy",
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetDateText",
+                        "description": "",
+                        "type": "text",
+                        "length": 25,
+                        "source": "Report",
+                        "reference": ""
+                    },
+                    {
+                        "field": "AssetNotes",
+                        "description": "Comments or further information",
+                        "type": "Text",
+                        "length": 100,
+                        "source": "CRP",
+                        "reference": ""
+                    },
+                    {
+                        "field": "Dupe",
+                        "description": "\"D\" if record is duplicated in same or subsiquent reports and should not be calculated or displayed.",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "CRP",
+                        "reference": ""
+                    }
+                ]
+            },
+            "PFDcomp": {
+                "record_count": 962,
+                "fields": [
+                    {
+                        "field": "ID",
+                        "description": "unique id within a year",
+                        "type": "Text",
+                        "length": 15,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Chamber",
+                        "description": "Rerfers to chamber the report was filed with. \"H\" for House, \"S\" for Senate, \"E\" for executive branch",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "CID",
+                        "description": "Unique id for each filer.",
+                        "type": "Text",
+                        "length": 9,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "CalendarYear",
+                        "description": "Year covered by report",
+                        "type": "Text",
+                        "length": 2,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "ReportType",
+                        "description": "\"Y\" for annual report, \"A\" for amendment, \"N\" for nominee or candidate, \"T\" for termination",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "CompSource",
+                        "description": "Source of compensation as reported by filer",
+                        "type": "Text",
+                        "length": 100,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "Orgname",
+                        "description": "Standardized source of compensation",
+                        "type": "Text",
+                        "length": 40,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Ultorg",
+                        "description": "Standardized parent organization of Orgname",
+                        "type": "Text",
+                        "length": 40,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Realcode",
+                        "description": "Industry code for CompSource",
+                        "type": "Text",
+                        "length": 5,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Source",
+                        "description": "Source used to determine Realcode",
+                        "type": "Text",
+                        "length": 5,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "CompSourceLocation",
+                        "description": "City, State of CompSource",
+                        "type": "Text",
+                        "length": 50,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "CompDuties",
+                        "description": "Description of duties performed in return for compensation",
+                        "type": "Text",
+                        "length": 100,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "dupe",
+                        "description": "\"D\" if record is duplicated in same or subsiquent reports and should not be calculated or displayed.",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "CRP"
+                    }
+                ]
+            },
+            "PFDgift": {
+                "record_count": 3165,
+                "fields": [
+                    {
+                        "field": "ID",
+                        "description": "unique id within a year",
+                        "type": "Text",
+                        "length": 15,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Chamber",
+                        "description": "Rerfers to chamber the report was filed with. 'H' for House, 'S' for Senate, 'E' for executive branch",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "CID",
+                        "description": "Unique id for each filer.",
+                        "type": "Text",
+                        "length": 9,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "CalendarYear",
+                        "description": "Year covered by report",
+                        "type": "Text",
+                        "length": 2,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "ReportType",
+                        "description": "'Y' for annual report, 'A' for amendment, 'N' for nominee or candidate, 'T' for termination",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "GiftSpouseJointDep",
+                        "description": "Gift recipient is filer jointly with spouse, spouse alone, or dependent child. Null or empty presumes filer was recipient.",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "GiftSource",
+                        "description": "Organization or individual who made the gift as reported by filer",
+                        "type": "Text",
+                        "length": 200,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "Orgname",
+                        "description": "Standardized GiftSource",
+                        "type": "Text",
+                        "length": 40,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Ultorg",
+                        "description": "Standardized parent organization of GiftSource",
+                        "type": "Text",
+                        "length": 40,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Realcode",
+                        "description": "Industry code for GiftSource",
+                        "type": "Text",
+                        "length": 5,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Source",
+                        "description": "Source used to determine Realcode",
+                        "type": "Text",
+                        "length": 5,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "GiftLocation",
+                        "description": "City, state of GiftSource",
+                        "type": "Text",
+                        "length": 50,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "GiftDate",
+                        "description": "Date the gift was given",
+                        "type": "Date",
+                        "length": null,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "GiftDateText",
+                        "description": "Date the gift was given",
+                        "type": "Text",
+                        "length": 20,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "GiftDescrip",
+                        "description": "Description of gift",
+                        "type": "Text",
+                        "length": 200,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "GiftInfo",
+                        "description": "Additional information about gift",
+                        "type": "Text",
+                        "length": 100,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "GiftValue",
+                        "description": "Value of gift",
+                        "type": "Currency",
+                        "length": null,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "GiftValueText",
+                        "description": "Value of gift",
+                        "type": "Text",
+                        "length": 50,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "Dupe",
+                        "description": "'D' if record is duplicated in same or subsiquent reports and should not be calculated or displayed.",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "CRP"
+                    }                    
+                ]
+            },
+            "PFDhonoraria": {
+                "record_count": 2834,
+                "fields": [
+                    {
+                        "field": "ID",
+                        "description": "unique id within a year",
+                        "type": "text",
+                        "length": 15,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Chamber",
+                        "description": "Rerfers to chamber the report was filed with. 'H' for House, 'S' for Senate, 'E' for executive branch",
+                        "type": "text",
+                        "length": 1,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "CID",
+                        "description": "Unique id for each filer.",
+                        "type": "text",
+                        "length": 9,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "CalendarYear",
+                        "description": "Year covered by report",
+                        "type": "text",
+                        "length": 2,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "ReportType",
+                        "description": "'Y' for annual report, 'A' for amendment, 'N' for nominee or candidate, 'T' for termination",
+                        "type": "text",
+                        "length": 1,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "HonorariaSource",
+                        "description": "Organization that paid honoraria, as reported by filer",
+                        "type": "text",
+                        "length": 100,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "Orgname",
+                        "description": "Standardized version of HonorariaSource",
+                        "type": "text",
+                        "length": 40,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Ultorg",
+                        "description": "Standardized parent organization of HonorariaSource",
+                        "type": "text",
+                        "length": 40,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Realcode",
+                        "description": "Industry code of HonorariaSource",
+                        "type": "text",
+                        "length": 5,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Source",
+                        "description": "Source used to determine Realcode",
+                        "type": "text",
+                        "length": 5,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "HonorariaSourceLoc",
+                        "description": "City, state of Honoraria Source",
+                        "type": "text",
+                        "length": 50,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "HonorariaActivity",
+                        "description": "Description of activities that earned the honoraria",
+                        "type": "text",
+                        "length": 255,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "HonorariaDate",
+                        "description": "Date activity was performed",
+                        "type": "date",
+                        "length": null,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "HonorariaDateText",
+                        "description": "Date activity was performed",
+                        "type": "text",
+                        "length": 20,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "HonorariaAmt",
+                        "description": "Value of honoraria paid",
+                        "type": "currency",
+                        "length": null,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "HonorariaAmtText",
+                        "description": "Value of honoraria paid",
+                        "type": "text",
+                        "length": 25,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "Dupe",
+                        "description": "'D' if record is duplicated in same or subsiquent reports and should not be calculated or displayed.",
+                        "type": "text",
+                        "length": 1,
+                        "source": "CRP"
+                    }                    
+                ]
+            },
+            "PFDincome": {
+                "record_count": 15582,
+                "fields": [
+                    {
+                        "field": "ID",
+                        "description": "unique id within a year",
+                        "type": "text",
+                        "length": 15,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Chamber",
+                        "description": "Rerfers to chamber the report was filed with. 'H' for House, 'S' for Senate, 'E' for executive branch",
+                        "type": "text",
+                        "length": 1,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "CID",
+                        "description": "Unique id for each filer.",
+                        "type": "text",
+                        "length": 9,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "CalendarYear",
+                        "description": "Year covered by report",
+                        "type": "text",
+                        "length": 2,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "ReportType",
+                        "description": "'Y' for annual report, 'A' for amendment, 'N' for nominee or candidate, 'T' for termination",
+                        "type": "text",
+                        "length": 1,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "IncomeSource",
+                        "description": "Organization that paid income, as reported by filer",
+                        "type": "text",
+                        "length": 100,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "Orgname",
+                        "description": "Standardized version of IncomeSource",
+                        "type": "text",
+                        "length": 40,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Ultorg",
+                        "description": "Standardized parent organization of IncomeSource",
+                        "type": "text",
+                        "length": 40,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Realcode",
+                        "description": "Industry code of IncomeSource",
+                        "type": "text",
+                        "length": 5,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Source",
+                        "description": "Source used to determine Realcode",
+                        "type": "text",
+                        "length": 5,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "IncomeLocation",
+                        "description": "City, state of IncomeSource",
+                        "type": "text",
+                        "length": 50,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "IncomeSpouseDep",
+                        "description": "Income recipient is filer jointly with spouse, spouse alone, or dependent child. Null or empty presumes filer was recipient.",
+                        "type": "text",
+                        "length": 1,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "IncomeType",
+                        "description": "Description of income type. e.g., 'salary'",
+                        "type": "text",
+                        "length": 50,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "IncomeAmt",
+                        "description": "Value of income. Non-filer items can be reported as 'Over $1,000'",
+                        "type": "currency",
+                        "length": null,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "IncomeAmtText",
+                        "description": "Value of income. Non-filer items can be reported as 'Over $1,000'",
+                        "type": "text",
+                        "length": 50,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "Dupe",
+                        "description": "'D' if record is duplicated in same or subsiquent reports and should not be calculated or displayed.",
+                        "type": "text",
+                        "length": 1,
+                        "source": "CRP"
+                    }
+                ]
+            },
+            "PFDliability": {
+                "record_count": 20295,
+                "fields": [
+                    {
+                        "field": "ID",
+                        "description": "unique id within a year",
+                        "type": "text",
+                        "length": 15,
+                        "source": "CRP",
+                        "reference": null
+                    },
+                    {
+                        "field": "Chamber",
+                        "description": "Rerfers to chamber the report was filed with. 'H' for House, 'S' for Senate, 'E' for executive branch",
+                        "type": "text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "CID",
+                        "description": "Unique id for each filer.",
+                        "type": "text",
+                        "length": 9,
+                        "source": "CRP",
+                        "reference": null
+                    },
+                    {
+                        "field": "CalendarYear",
+                        "description": "Year covered by report",
+                        "type": "text",
+                        "length": 2,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "ReportType",
+                        "description": "'Y' for annual report, 'A' for amendment, 'N' for nominee or candidate, 'T' for termination",
+                        "type": "text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "LiabilitySpouseJointDep",
+                        "description": "Person liable is filer jointly with spouse, spouse alone, or dependent child. Null or empty presumes filer is liable alone.",
+                        "type": "text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "Creditor",
+                        "description": "Organization or individual who made the loan as reported by filer",
+                        "type": "text",
+                        "length": 100,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "Orgname",
+                        "description": "Standardized Creditor",
+                        "type": "text",
+                        "length": 40,
+                        "source": "CRP",
+                        "reference": null
+                    },
+                    {
+                        "field": "Ultorg",
+                        "description": "Standardized parent organization of Creditor",
+                        "type": "text",
+                        "length": 40,
+                        "source": "CRP",
+                        "reference": null
+                    },
+                    {
+                        "field": "Realcode",
+                        "description": "Industry code for Creditor",
+                        "type": "text",
+                        "length": 5,
+                        "source": "CRP",
+                        "reference": null
+                    },
+                    {
+                        "field": "Source",
+                        "description": "Source used to determine Realcode",
+                        "type": "text",
+                        "length": 5,
+                        "source": "CRP",
+                        "reference": null
+                    },
+                    {
+                        "field": "TypeofLiability",
+                        "description": "Description of loan type. e.g., 'mortgage'",
+                        "type": "text",
+                        "length": 100,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "LiabilityLoc",
+                        "description": "City, state of Creditor",
+                        "type": "text",
+                        "length": 50,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "LiabilityDate",
+                        "description": "Date the liability originated",
+                        "type": "date",
+                        "length": null,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "LiabilityDateText",
+                        "description": "Date the liability originated",
+                        "type": "text",
+                        "length": 25,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "LiabilityTerm",
+                        "description": "Length of loan term",
+                        "type": "text",
+                        "length": 50,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "LiabilityInterestRate",
+                        "description": "Interest rate paid on loan",
+                        "type": "text",
+                        "length": 20,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "LiabilityAmt",
+                        "description": "Value of liability",
+                        "type": "text",
+                        "length": 2,
+                        "source": "Report",
+                        "reference": "RangesLiability.Code"
+                    },
+                    {
+                        "field": "Dupe",
+                        "description": "'D' if record is duplicated in same or subsiquent reports and should not be calculated or displayed.",
+                        "type": "text",
+                        "length": 1,
+                        "source": "CRP",
+                        "reference": null
+                    }
+                ]
+            },
+            "PFDposition": {
+                "record_count": 22058,
+                "fields": [
+                    {
+                        "field": "ID",
+                        "description": "unique id within a year",
+                        "type": "text",
+                        "length": 15,
+                        "source": null
+                    },
+                    {
+                        "field": "Chamber",
+                        "description": "Rerfers to chamber the report was filed with. 'H' for House, 'S' for Senate, 'E' for executive branch",
+                        "type": "text",
+                        "length": 1,
+                        "source": null
+                    },
+                    {
+                        "field": "CID",
+                        "description": "Unique id for each filer.",
+                        "type": "text",
+                        "length": 9,
+                        "source": null
+                    },
+                    {
+                        "field": "CalendarYear",
+                        "description": "Year covered by report",
+                        "type": "text",
+                        "length": 2,
+                        "source": null
+                    },
+                    {
+                        "field": "ReportType",
+                        "description": "'Y' for annual report, 'A' for amendment, 'N' for nominee or candidate, 'T' for termination",
+                        "type": "text",
+                        "length": 1,
+                        "source": null
+                    },
+                    {
+                        "field": "PositionHeld",
+                        "description": "Position held with organization listed in PositionOrg",
+                        "type": "text",
+                        "length": 100,
+                        "source": null
+                    },
+                    {
+                        "field": "PositionOrg",
+                        "description": "Organization with which position is held",
+                        "type": "text",
+                        "length": 100,
+                        "source": null
+                    },
+                    {
+                        "field": "Orgname",
+                        "description": "Standardized version of PositionOrg",
+                        "type": "text",
+                        "length": 40,
+                        "source": null
+                    },
+                    {
+                        "field": "Ultorg",
+                        "description": "Standardized parent of PositionOrg",
+                        "type": "text",
+                        "length": 40,
+                        "source": null
+                    },
+                    {
+                        "field": "Realcode",
+                        "description": "Industry code of PositionOrg",
+                        "type": "text",
+                        "length": 5,
+                        "source": null
+                    },
+                    {
+                        "field": "Source",
+                        "description": "Source used to determine Realcode",
+                        "type": "text",
+                        "length": 5,
+                        "source": null
+                    },
+                    {
+                        "field": "PositionOrgLoc",
+                        "description": "City, state of PositionOrg",
+                        "type": "text",
+                        "length": 50,
+                        "source": null
+                    },
+                    {
+                        "field": "PositionOrgType",
+                        "description": "Description of organization",
+                        "type": "text",
+                        "length": 50,
+                        "source": null
+                    },
+                    {
+                        "field": "PositionFromDate",
+                        "description": "Date filer began holding this position",
+                        "type": "date",
+                        "length": null,
+                        "source": null
+                    },
+                    {
+                        "field": "PositionFromDateText",
+                        "description": "Date filer began holding this position",
+                        "type": "text",
+                        "length": 50,
+                        "source": null
+                    },
+                    {
+                        "field": "PositionToDate",
+                        "description": "Date filer stopped holding this position",
+                        "type": "date",
+                        "length": null,
+                        "source": null
+                    },
+                    {
+                        "field": "PositionToDateText",
+                        "description": "Date filer stopped holding this position",
+                        "type": "text",
+                        "length": 50,
+                        "source": null
+                    },
+                    {
+                        "field": "Dupe",
+                        "description": "'D' if record is duplicated in same or subsiquent reports and should not be calculated or displayed.",
+                        "type": "text",
+                        "length": 1,
+                        "source": null
+                    }
+                ]
+            },
+            "PFDtrans": {
+                "record_count": 377654,
+                "fields": [
+                    {
+                        "field": "ID",
+                        "description": null,
+                        "type": "text",
+                        "length": 15,
+                        "source": "CRP",
+                        "reference": null
+                    },
+                    {
+                        "field": "Chamber",
+                        "description": "Rerfers to chamber the report was filed with. 'H' for House, 'S' for Senate, 'E' for executive branch",
+                        "type": "text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "CID",
+                        "description": "Unique code for filer",
+                        "type": "text",
+                        "length": 9,
+                        "source": "CRP",
+                        "reference": null
+                    },
+                    {
+                        "field": "CalendarYear",
+                        "description": "Indicates Year coverd by report",
+                        "type": "text",
+                        "length": 2,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "ReportType",
+                        "description": "Y=Annual filing, A=Amendment, T=Termination",
+                        "type": "text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "Asset4SJD",
+                        "description": "S=Spouse, J=Joint, D=Dependent Child, Null=Filer",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "Asset4Transacted",
+                        "description": "Raw asset name. If the asset is held within an account, the raw account name.",
+                        "type": "Text",
+                        "length": 100,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "Orgname",
+                        "description": "Standardized version of Asset4Transacted. (More reliable than Asset4Transacted. If errors are found in Asset4Descrip, they are corrected here but not in the raw field.)",
+                        "type": "Text",
+                        "length": 40,
+                        "source": "CRP",
+                        "reference": null
+                    },
+                    {
+                        "field": "Ultorg",
+                        "description": "Standardized parent organization of Orgname",
+                        "type": "Text",
+                        "length": 40,
+                        "source": "CRP",
+                        "reference": null
+                    },
+                    {
+                        "field": "RealCode",
+                        "description": null,
+                        "type": "Text",
+                        "length": 5,
+                        "source": "CRP",
+                        "reference": null
+                    },
+                    {
+                        "field": "Source",
+                        "description": null,
+                        "type": "Text",
+                        "length": 5,
+                        "source": "CRP",
+                        "reference": null
+                    },
+                    {
+                        "field": "Asset4Descrip",
+                        "description": "If the asset is held within an account, the raw asset name.",
+                        "type": "Text",
+                        "length": 100,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "Orgname2",
+                        "description": "Standardized version of Asset4Descrip. (More reliable than Asset4Descrip. If errors are found in Asset4Descrip, they are corrected here but not in the raw field.)",
+                        "type": "Text",
+                        "length": 40,
+                        "source": "CRP",
+                        "reference": null
+                    },
+                    {
+                        "field": "Ultorg2",
+                        "description": "Standardized parent organization of Orgname2",
+                        "type": "Text",
+                        "length": 40,
+                        "source": "CRP",
+                        "reference": null
+                    },
+                    {
+                        "field": "RealCode2",
+                        "description": null,
+                        "type": "Text",
+                        "length": 5,
+                        "source": "CRP",
+                        "reference": null
+                    },
+                    {
+                        "field": "Source2",
+                        "description": null,
+                        "type": "Text",
+                        "length": 5,
+                        "source": "CRP",
+                        "reference": null
+                    },
+                    {
+                        "field": "Asset4Purchased",
+                        "description": "Asset was purchased",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "Asset4Sold",
+                        "description": "Asset was sold",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "Asset4Exchanged",
+                        "description": "Asset was exchanged",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "Asset4Date",
+                        "description": "Date of Transaction",
+                        "type": "Date",
+                        "length": null,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "Asset4DateText",
+                        "description": "Date of Transaction",
+                        "type": "Text",
+                        "length": 50,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "Asset4TransAmt",
+                        "description": "Code indicating amount of transaction. ",
+                        "type": "Text",
+                        "length": 2,
+                        "source": "Report",
+                        "reference": "If Chamber='H', then RangesTransHouseOnly.Code. Otherwise, RangesAssets.Code (Also see DoleTransFactors"
+                    },
+                    {
+                        "field": "Asset4ExactAmt",
+                        "description": "Exact amount of transaction, if given.",
+                        "type": "Number",
+                        "length": null,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "CofD",
+                        "description": "Certificate of Divestiture",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "Report",
+                        "reference": null
+                    },
+                    {
+                        "field": "TransNotes",
+                        "description": "Notes including other types than sold, purchased, exchanged.",
+                        "type": "Text",
+                        "length": 100,
+                        "source": "CRP",
+                        "reference": null
+                    },
+                    {
+                        "field": "Dupe",
+                        "description": "'D' if record is duplicated in same or subsiquent reports and should not be calculated or displayed.",
+                        "type": "Text",
+                        "length": 1,
+                        "source": "CRP",
+                        "reference": null
+                    }
+                ]
+            },
+            "PFDtravel": {
+                "record_count": 9541,
+                "fields": [
+                    {
+                        "field": "ID",
+                        "description": "unique id within a year",
+                        "type": "text",
+                        "length": 15,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Chamber",
+                        "description": "Rerfers to chamber the report was filed with. 'H' for House, 'S' for Senate, 'E' for executive branch",
+                        "type": "text",
+                        "length": 1,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "CID",
+                        "description": "Unique id for each filer.",
+                        "type": "text",
+                        "length": 9,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "CalendarYear",
+                        "description": "Year covered by report",
+                        "type": "text",
+                        "length": 2,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "ReportType",
+                        "description": "'Y' for annual report, 'A' for amendment, 'N' for nominee or candidate, 'T' for termination",
+                        "type": "text",
+                        "length": 1,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "TravelSource",
+                        "description": "Travel sponsor as reported by filer",
+                        "type": "text",
+                        "length": 100,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "Orgname",
+                        "description": "standardized version of TravelSource",
+                        "type": "text",
+                        "length": 40,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Ultorg",
+                        "description": "Standardized parent organization of TravelSource",
+                        "type": "text",
+                        "length": 40,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Realcode",
+                        "description": "Industry code for TravelSource",
+                        "type": "text",
+                        "length": 5,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "Source",
+                        "description": "Source used to determine Realcode",
+                        "type": "text",
+                        "length": 5,
+                        "source": "CRP"
+                    },
+                    {
+                        "field": "SourceCity",
+                        "description": "City where TravelSource is located",
+                        "type": "text",
+                        "length": 50,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "SourceState",
+                        "description": "State where TravelSource is located",
+                        "type": "text",
+                        "length": 2,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "BeginDate",
+                        "description": "Date that trip began",
+                        "type": "date",
+                        "length": null,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "BeginDateText",
+                        "description": "Date that trip began",
+                        "type": "text",
+                        "length": 25,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "EndDate",
+                        "description": "Date that trip ended",
+                        "type": "date",
+                        "length": null,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "EndDateText",
+                        "description": "Date that trip ended",
+                        "type": "text",
+                        "length": 25,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "DepartCity",
+                        "description": "City from which filer traveled to start trip",
+                        "type": "text",
+                        "length": 50,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "DepartState",
+                        "description": "State from which filer traveled to start trip",
+                        "type": "text",
+                        "length": 2,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "DestCity",
+                        "description": "Destination city where trip took place",
+                        "type": "text",
+                        "length": 50,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "DestState",
+                        "description": "Destination state where trip took place",
+                        "type": "text",
+                        "length": 2,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "PofRCity",
+                        "description": "City that filer returned to at end of trip (point of return)",
+                        "type": "text",
+                        "length": 50,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "PofRState",
+                        "description": "City that filer returned to at end of trip (point of return)",
+                        "type": "text",
+                        "length": 2,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "Descrip",
+                        "description": "Description of trip and purpose",
+                        "type": "text",
+                        "length": 255,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "Lodging",
+                        "description": "Was lodging provided by TravelSource during the trip",
+                        "type": "text",
+                        "length": 1,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "Food",
+                        "description": "Was food provided by TravelSource during the trip",
+                        "type": "text",
+                        "length": 1,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "FamilyIncl",
+                        "description": "Was travel for family members also provided by TravelSource",
+                        "type": "text",
+                        "length": 1,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "TimeAtOwnExpense",
+                        "description": "Description of portions of trip that were paid for at filer's expense",
+                        "type": "text",
+                        "length": 25,
+                        "source": "Report"
+                    },
+                    {
+                        "field": "Dupe",
+                        "description": "'D' if record is duplicated in same or subsiquent reports and should not be calculated or displayed.",
+                        "type": "text",
+                        "length": 1,
+                        "source": "CRP"
+                    }
+                ]
             }
         }
     }
