@@ -2,11 +2,6 @@ import json
 from os.path import join
 import pandas as pd
 
-# Read in file data
-with open('data_dictionary.json') as f:
-    data_dictionary = json.load(f)
-    categories = list(data_dictionary.keys())
-
 
 # lob_lobbyist data is a special case
 # some records are split across multiple lines
@@ -37,12 +32,14 @@ def parse_lob_lobbyist(path, columns):
     return df
 
 
+# Given columns, read in txt file as a dataframe
 def get_df_from_txt_file(path, fields):
     types_parse = {
         'varchar': 'string',
         'text': 'string',
         'char': 'string', 
         'float': 'Float64',
+        'memo': 'string',
         'number': 'Float64',
         'int': 'Int32',
         'integer': 'Int32',
@@ -53,7 +50,7 @@ def get_df_from_txt_file(path, fields):
     dtypes = { field['field'] : types_parse[field['type'].lower()] for field in fields }
     col_names = [field['field'] for field in fields]
     
-    parse_dates = [field['field'] for field in fields if field['type'].lower().contains('date')]
+    parse_dates = [field['field'] for field in fields if 'date' in field['type'].lower()]
 
     if 'lob_lobbyist' in path:
         df = parse_lob_lobbyist(path, col_names)
@@ -71,18 +68,27 @@ def get_df_from_txt_file(path, fields):
     return df
 
 
+data_dir = 'data/'
+
+# Read in file data
+with open('data_dictionary.json') as f:
+    data_dictionary = json.load(f)
+    categories = list(data_dictionary.keys())
+
+# Iterate over categories and tables
 for category, cat_dict in data_dictionary.items():
     print("Reading category %s..." % category)
     tables = list(cat_dict['tables'].keys())
     for table in tables:
         print("Reading table %s..." % table)
-        path = join('data/', category, '%s.txt' % table)
+        path = join(data_dir, category, '%s.txt' % table)
         params = cat_dict['tables'][table]
         total_records = params['record_count']
 
         df = get_df_from_txt_file(path, params['fields'])
         
         if df.shape[0] != total_records:
-            print(f"ERROR: {path} has {df.shape[0]} records, but should have {total_records}")
+            error_msg = f"ERROR: {path} has {df.shape[0]} records, but should have {total_records}"
+            print(error_msg)
 
         print("Finished reading %d rows" % df.shape[0])
