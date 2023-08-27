@@ -1,0 +1,77 @@
+@startuml
+
+!theme materia
+
+skinparam Padding 2
+skinparam linetype ortho
+
+entity "Firm" as ent {
+    name<PK>: string
+    parent<FK>: string
+    catCode<FK>: string
+    catSource: string
+}
+
+entity "Industry" as indust {
+    Catcode<PK>: string
+    --
+    Catname: string
+    Catorder: string
+    Industry: string
+    Sector: string
+    SectorLong: string
+}
+
+entity "LobbyingFirm" as lobf {
+    Name<FK>: string
+}
+
+entity "Agency" as agency {
+    Uniqid<FK>: string
+    Name: string
+}
+
+entity "LobbyingRecord" as lr {
+    Uniqid<FK>: string
+    Registrant<FK>: string
+    Isfirm: boolean
+    Client<FK>: string
+    Amount: float
+    Source: string
+    Self: char
+    Type: string
+    Affiliate: bool
+}
+
+entity "Lobbyist" as lob {
+    Name: string
+    Uniqid<FK>: string
+}
+
+entity "Bill" as bill {
+    BillID<PK>: int
+    SI_ID<FK>: string
+    CongNo: int
+    BillName: string
+}
+
+entity "Issue" as issue {
+    SI_ID<FK>: string
+    UniqID<FK>: string
+    Issue: string
+    SpecificIssue: string
+    Year: int
+}
+
+ent}|..||ent:subsidiary_of
+ent||..|{indust:belongs_to
+ent||..|{lr:lobbies
+lobf||..o{lr:lobbies_through
+lob}|..|{lr:worked_on
+lob}|..|{lobf:works_for
+lr}|..||agency:lobbied
+bill}|..||lr:lobbied_on
+bill}|..||issue:related_to
+lr}|..||issue:issue_lobbied_on
+
+@enduml

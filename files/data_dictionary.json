@@ -2509,5 +2509,34 @@
                 ]
             }
         }
+    },
+    "CampaignFin": {
+        "tables": {
+            "cands": {
+                "fields": [
+
+                ]
+            },
+            "cmtes": {
+                "fields": [
+
+                ]
+            },
+            "indivs": {
+                "fields": [
+
+                ]
+            },
+            "pac_other": {
+                "fields": [
+
+                ]
+            },
+            "pacs": {
+                "fields": [
+
+                ]
+            }
+        }
     }
 }
