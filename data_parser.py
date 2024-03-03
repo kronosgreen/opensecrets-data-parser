@@ -28,6 +28,8 @@ args = parser.parse_args()
 if not exists(args.output):
     mkdir(args.output)
 
+print(f"Parsing OpenSecrets data in {args.data} and writing to {args.format} files")
+
 
 # lob_lobbyist data is a special case
 # some records are split across multiple lines
