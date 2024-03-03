@@ -1,6 +1,32 @@
 import json
-from os.path import join
+from os.path import join, exists
+from os import mkdir
 import pandas as pd
+import argparse
+
+
+# Initialize the parser
+parser = argparse.ArgumentParser(
+                    prog='OpenSecrets Data Parser',
+                    description='Parses text files from OpenSecrets.org bulk download ' + \
+                                'and converts them to the desired format',
+                    epilog='Happy parsing! :)')
+
+# Add arguments
+parser.add_argument('data', type=str, help='Path to the directory containing the data files')
+
+# Add optional arguments
+parser.add_argument('--output', type=str, default='output', 
+                    help='Defines the path to which processed files are written (default: "./output")')
+parser.add_argument('--format', choices=['csv', 'neo4j', 'excel'], default='csv', 
+                    help='Desired output format (default: csv)')
+parser.add_argument('--LobbyOnly', action='store_true', help='Only parse the Lobbying data')
+
+args = parser.parse_args()
+
+# Create output directory if it doesn't exist
+if not exists(args.output):
+    mkdir(args.output)
 
 
 # lob_lobbyist data is a special case
@@ -64,24 +90,33 @@ def get_df_from_txt_file(path, fields):
                 quotechar='|',
                 encoding_errors='ignore'
         )
+        # Fix Specific Issue formatting
+        if 'lob_issue.txt' in path:
+            df.loc[df['SpecificIssue'].str.contains(r"\\"), "SpecificIssue"] = df.loc[
+                df['SpecificIssue'].str.contains(r"\\"), "SpecificIssue"
+            ].apply(
+                lambda x: x.replace('\\' + ' ', '\n').replace('\\', '').rstrip()
+            )
 
     return df
 
 
-data_dir = 'data/'
-
 # Read in file data
-with open('data_dictionary.json') as f:
+with open('files/data_dictionary.json') as f:
     data_dictionary = json.load(f)
-    categories = list(data_dictionary.keys())
 
 # Iterate over categories and tables
 for category, cat_dict in data_dictionary.items():
+    if args.format == 'csv':
+        mkdir(f"{args.output}/{category}")
+    
+    excel_sheets = []
+
     print("Reading category %s..." % category)
     tables = list(cat_dict['tables'].keys())
     for table in tables:
         print("Reading table %s..." % table)
-        path = join(data_dir, category, '%s.txt' % table)
+        path = join(args.data, category, '%s.txt' % table)
         params = cat_dict['tables'][table]
         total_records = params['record_count']
 
@@ -90,5 +125,17 @@ for category, cat_dict in data_dictionary.items():
         if df.shape[0] != total_records:
             error_msg = f"ERROR: {path} has {df.shape[0]} records, but should have {total_records}"
             print(error_msg)
+        
+        if args.format == 'csv':
+            df.to_csv(f"{args.output}/{category}/{table}.csv", index=False)
+        elif args.format == 'excel':
+            excel_sheets.append((table, df))
+        elif args.format == 'neo4j':
+            print("Neo4j format not yet supported")
 
         print("Finished reading %d rows" % df.shape[0])
+    
+    if args.format == 'excel':
+        with pd.ExcelWriter(f"{args.output}/{category}.xlsx") as writer:
+            for sheet in excel_sheets:
+                sheet[1].to_excel(writer, sheet_name=sheet[0], index=False)

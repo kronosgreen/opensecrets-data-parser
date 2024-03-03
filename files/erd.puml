@@ -34,8 +34,8 @@ entity "Agency" as agency {
 entity "LobbyingRecord" as lr {
     Uniqid<FK>: string
     Registrant<FK>: string
-    Isfirm: boolean
     Client<FK>: string
+    Isfirm: boolean
     Amount: float
     Source: string
     Self: char
@@ -55,23 +55,28 @@ entity "Bill" as bill {
     BillName: string
 }
 
-entity "Issue" as issue {
-    SI_ID<FK>: string
+entity "Specific Issue" as si {
+    SI_ID<PK>: string
     UniqID<FK>: string
-    Issue: string
     SpecificIssue: string
-    Year: int
+    IssueID<FK>: string
 }
 
-ent}|..||ent:subsidiary_of
-ent||..|{indust:belongs_to
-ent||..|{lr:lobbies
-lobf||..o{lr:lobbies_through
-lob}|..|{lr:worked_on
-lob}|..|{lobf:works_for
-lr}|..||agency:lobbied
-bill}|..||lr:lobbied_on
-bill}|..||issue:related_to
-lr}|..||issue:issue_lobbied_on
+entity "Issue" as issue {
+    IssueID<PK>: string
+    Issue: string
+}
+
+ent}|..||ent:SUBSIDIARY_OF
+ent||..|{indust:BELONGS_TO
+ent||..|{lr:LOBBIES
+lobf||..o{lr:LOBBIES_THROUGH
+lob}|..|{lr:WORKED_ON
+lob}|..|{lobf:WORKS_FOR
+lr}|..||agency:LOBBIED
+bill||..|{lr:LOBBIED_ON
+bill||..|{si:RELATED_TO
+lr}|..||si:CONCERNS
+si}|..||issue:MAIN_ISSUE
 
 @enduml

@@ -22,4 +22,4 @@
 ### Complete
 
 - [x] Read in basic text file as CSV w/ proper columns
-- [x] Process lobbyist table w/ rows broken over multiple lines
+- [x] Process lobbyist table w/ rows broken over multiple linesx
