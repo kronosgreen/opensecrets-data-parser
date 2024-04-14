@@ -131,7 +131,21 @@
                         "length": 1,
                         "source": "CRP"
                     }
-                ]
+                ],
+                "boolean_fields": {
+                    "Isfirm": {
+                        "true": "y",
+                        "false": null
+                    },
+                    "Use": {
+                        "true": "y",
+                        "false": "n"
+                    },
+                    "Ind": {
+                        "true": "y",
+                        "false": ""
+                    }
+                }
             },
             "lob_lobbyist": {
                 "record_count": 3475162,

@@ -1,0 +1,72 @@
+{
+    "Lobby": {
+        "lob_lobbying": {
+            "nodes": {
+                "lobbying_records": {
+                    "drop_dupes": false,
+                    "headers": [
+                        "UniqID:ID(LobbyingRecord)",
+                        "Isfirm",
+                        "Amount",
+                        "Source",
+                        "Self",
+                        "Type",
+                        "Affiliate"
+                    ],
+                    "columns": [
+                        "UniqID",
+                        "Isfirm",
+                        "Amount",
+                        "Source",
+                        "Self",
+                        "Type",
+                        "Affiliate"
+                    ]
+                },
+                "lobbying_firms": {
+                    "drop_dupes": true,
+                    "headers": [
+                        "Name:ID(LobbyingFirm)"
+                    ],
+                    "columns": [
+                        "Registrant"
+                    ],
+                    "filters": {
+                        "Isfirm": true
+                    }
+                },
+                "firms": {
+                    "drop_dupes": true,
+                    "headers": [
+                        "Name:ID(Firm)"
+                    ],
+                    "columns": [
+                        "Client"
+                    ]
+                }
+            },
+            "relationships": {
+                "client_record": {
+                    "headers": [
+                        ":START_ID(LobbyingFirm)",
+                        ":END_ID(LobbyingRecord)"
+                    ],
+                    "columns": [
+                        "UniqID",
+                        "Firm"
+                    ]
+                },
+                "record_lobbying_firm": {
+                    "headers": [
+                        ":START_ID(LobbyingRecord)",
+                        ":END_ID(Firm)"
+                    ],
+                    "columns": [
+                        "UniqID",
+                        "Registrant"
+                    ]
+                }
+            }
+        }
+    }
+}

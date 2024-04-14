@@ -2,8 +2,11 @@ import json
 from os.path import join, exists
 from os import mkdir
 import pandas as pd
+from functions import get_df_from_txt_file, process_df_neo4j
 import argparse
 
+# Constants
+EXCEL_ROW_LIMIT = 1000000
 
 # Initialize the parser
 parser = argparse.ArgumentParser(
@@ -20,7 +23,12 @@ parser.add_argument('--output', type=str, default='output',
                     help='Defines the path to which processed files are written (default: "./output")')
 parser.add_argument('--format', choices=['csv', 'neo4j', 'excel'], default='csv', 
                     help='Desired output format (default: csv)')
+
 parser.add_argument('--LobbyOnly', action='store_true', help='Only parse the Lobbying data')
+parser.add_argument('--PFDOnly', action='store_true', help='Only parse the personal finance data')
+parser.add_argument('--ExpenditureOnly', action='store_true', help='Only parse the expenditure data')
+parser.add_argument('--FiveTwoSevenOnly', action='store_true', help='Only parse the 527 data')
+parser.add_argument('--CampaignFinOnly', action='store_true', help='Only parse the campaign finance data')
 
 args = parser.parse_args()
 
@@ -28,90 +36,33 @@ args = parser.parse_args()
 if not exists(args.output):
     mkdir(args.output)
 
-print(f"Parsing OpenSecrets data in {args.data} and writing to {args.format} files")
-
-
-# lob_lobbyist data is a special case
-# some records are split across multiple lines
-def parse_lob_lobbyist(path, columns):
-    parsed_data = []
-    bad_data = []
-    with open(path, 'rb') as f:
-        lines = f.read().splitlines()
-        for i, line in enumerate(lines):
-            line_data = line.decode(errors='ignore').split('|')
-            line_parsed = line_data[1::2]
-            if len(line_parsed) != 8:
-                bad_data.append(line.decode(errors='ignore'))
-                continue
-            else:            
-                parsed_data.append(line_parsed)
-    
-    temp_line = ""
-    parsed_bad_data = []
-    for line in bad_data:
-        temp_line += line
-        if len(temp_line.split('|')[1::2]) == 8:
-            parsed_bad_data.append(temp_line.split('|')[1::2])
-            temp_line = ""
-
-    df = pd.DataFrame(parsed_data + parsed_bad_data, columns=columns)
-
-    return df
-
-
-# Given columns, read in txt file as a dataframe
-def get_df_from_txt_file(path, fields):
-    types_parse = {
-        'varchar': 'string',
-        'text': 'string',
-        'char': 'string', 
-        'float': 'Float64',
-        'memo': 'string',
-        'number': 'Float64',
-        'int': 'Int32',
-        'integer': 'Int32',
-        'datetime': 'string',
-        'date': 'string'
-    }
-
-    dtypes = { field['field'] : types_parse[field['type'].lower()] for field in fields }
-    col_names = [field['field'] for field in fields]
-    
-    parse_dates = [field['field'] for field in fields if 'date' in field['type'].lower()]
-
-    if 'lob_lobbyist' in path:
-        df = parse_lob_lobbyist(path, col_names)
-    else:
-        df = pd.read_csv(path,
-                engine='python',
-                header=None,
-                dtype=dtypes,
-                parse_dates=parse_dates,
-                names=col_names,
-                quotechar='|',
-                encoding_errors='ignore'
-        )
-        # Fix Specific Issue formatting
-        if 'lob_issue.txt' in path:
-            df.loc[df['SpecificIssue'].str.contains(r"\\"), "SpecificIssue"] = df.loc[
-                df['SpecificIssue'].str.contains(r"\\"), "SpecificIssue"
-            ].apply(
-                lambda x: x.replace('\\' + ' ', '\n').replace('\\', '').rstrip()
-            )
-
-    return df
-
-
 # Read in file data
 with open('files/data_dictionary.json') as f:
     data_dictionary = json.load(f)
 
+neo4j_dictionary = {}
+if args.format == 'neo4j':
+    with open('files/neo4j-headers.json') as f:
+        neo4j_dictionary = json.load(f)
+
 # Iterate over categories and tables
+print(f"Parsing OpenSecrets data in {args.data} and writing to {args.format} files")
 for category, cat_dict in data_dictionary.items():
-    if args.format == 'csv':
+
+    if args.LobbyOnly and category != 'Lobby':
+        continue
+    if args.PFDOnly and category != 'PFD':
+        continue
+    if args.ExpenditureOnly and category != 'Expenditures':
+        continue
+    if args.CampaignFinOnly and category != 'CampaignFin':
+        continue
+    if args.FiveTwoSevenOnly and category != '527':
+        continue
+
+    if args.format in ['csv', 'neo4j'] and not exists(f"{args.output}/{category}"):
         mkdir(f"{args.output}/{category}")
-    
+
     excel_sheets = []
 
     print("Reading category %s..." % category)
@@ -122,7 +73,9 @@ for category, cat_dict in data_dictionary.items():
         params = cat_dict['tables'][table]
         total_records = params['record_count']
 
-        df = get_df_from_txt_file(path, params['fields'])
+        bool_fields = params['boolean_fields'] if 'boolean_fields' in params else None
+
+        df = get_df_from_txt_file(path, params['fields'], bool_fields)
         
         if df.shape[0] != total_records:
             error_msg = f"ERROR: {path} has {df.shape[0]} records, but should have {total_records}"
@@ -131,9 +84,18 @@ for category, cat_dict in data_dictionary.items():
         if args.format == 'csv':
             df.to_csv(f"{args.output}/{category}/{table}.csv", index=False)
         elif args.format == 'excel':
-            excel_sheets.append((table, df))
+            if df.shape[0] >= 1048576:
+                print("WARNING: Excel only supports 1,048,576 rows. Splitting up file.")
+                ind = 1
+                for i in range(0, df.shape[0], EXCEL_ROW_LIMIT):
+                    excel_sheets.append((f"{table}_{ind}", df[i:i+EXCEL_ROW_LIMIT]))
+                    ind += 1
+            else:
+                excel_sheets.append((table, df))
         elif args.format == 'neo4j':
-            print("Neo4j format not yet supported")
+            results = process_df_neo4j(df, neo4j_dictionary[category][table])
+            for r, name in results:
+                r.to_csv(f"{args.output}/{category}/{table}/{name}.csv", index=False)
 
         print("Finished reading %d rows" % df.shape[0])
     
